@@ -7,21 +7,6 @@ búsqueda por nombre, [Rick and Morty API](https://rickandmortyapi.com/)) y comp
 episodios en tres columnas: exclusivos de #1, compartidos, exclusivos de #2. La selección
 queda en la URL (`?c1=&c2=`) — el resultado es compartible por link.
 
-## Requisitos cubiertos
-
-| Requisito                       | Cómo se cubre                                                  |
-| ------------------------------- | -------------------------------------------------------------- |
-| TypeScript (2+ años)            | Todo el proyecto en TS estricto, cero `any`                    |
-| React + Next.js                 | App Router, Server + Client Components combinados a propósito  |
-| Patrones de diseño              | Repository, Custom Hooks, Container/Presentational (ver abajo) |
-| Testing (Jest/RTL)              | Unitarios + componente + integración                           |
-| Prettier / Lint                 | ESLint 9 + Prettier configurados                               |
-| Animaciones                     | Framer Motion                                                  |
-| PWA / Figma / demos con cliente | No aplica a este entregable                                    |
-
-**Extras no pedidos:** dark mode, filtro por status, búsqueda por nombre con debounce,
-comparación compartible por URL, `next/image`, manejo de errores 4xx/5xx diferenciado.
-
 ## Quick start
 
 Requiere **Node.js 20+**.
@@ -53,9 +38,22 @@ pnpm test:watch
 pnpm test:coverage
 ```
 
-Unitarios (`utils/episodes.ts`, sin mocks) + componente (`CharacterCard`, `EpisodeList`, aislados) +
-integración (`HomeClient`: verifica que las 3 columnas están ocultas hasta elegir ambos personajes,
-y que `fetchEpisodesByIds` no se llama de más — no solo que la UI lo oculta).
+**49 tests** — unitarios (lógica pura, sin mocks), de componente (aislados) e integración
+(`HomeClient` con TanStack Query real). Algunos casos, elegidos porque prueban bordes reales,
+no solo el camino feliz:
+
+- **Regla de negocio** (`utils/episodes.ts`): partición sin intersección, listas idénticas, listas
+  vacías — y en integración, que las 3 columnas quedan ocultas hasta elegir ambos personajes,
+  verificando que `fetchEpisodesByIds` **no se llama** (no solo que la UI lo oculta).
+- **Selección**: bloquea elegir el mismo personaje en los dos lados; confirma cuál sigue
+  seleccionado aunque haya scrolleado fuera de la vista visible.
+- **Errores y reintentos**: un 404 no se reintenta solo (nunca va a cambiar) pero un 5xx sí, una
+  vez; un link compartido con un id que no existe muestra error + reintentar, no falla en
+  silencio; reintentar tras un error de personajes/episodios recupera el estado normal.
+- **Accesibilidad**: `aria-pressed` en la card seleccionada; roles ARIA correctos en el listbox
+  de filtro (cierra con Escape, cierra al clickear afuera).
+- **UX de carga**: `keepPreviousData` evita el flash de skeleton al cambiar de personaje;
+  debounce del buscador no dispara un request por tecla.
 
 ## Otros scripts
 
