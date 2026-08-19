@@ -79,11 +79,11 @@ src/
   app/           page.tsx (prefetch + hidratación), layout.tsx, providers.tsx, globals.css
                  loading.tsx / error.tsx (estados a nivel de ruta), icon.tsx / apple-icon.tsx (favicon)
   components/    Home/ (Client Component con la lógica interactiva) + un folder por componente
-  hooks/         useCharacters, useEpisodesComparison, useDebouncedValue, useTheme...
+  hooks/         useCharacters, useEpisodesComparison, useDebouncedValue, useTheme, useCopyToClipboard
   lib/           api.ts (HTTP), query-client.ts, query-keys.ts, constants.ts
   types/         Tipos de dominio (Character, Episode, ...)
-  utils/         episodes.ts — lógica pura: partición de episodios
-__tests__/       Unitarios + integración
+  utils/         episodes.ts (partición de episodios), statusColors.ts — lógica pura
+__tests__/       Unitarios + componente + integración
 ```
 
 **Patrones aplicados** (código de referencia entre paréntesis):
