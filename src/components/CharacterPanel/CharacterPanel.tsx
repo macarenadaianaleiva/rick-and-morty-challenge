@@ -25,9 +25,13 @@ interface CharacterPanelProps {
   excludeLabel?: string;
 }
 
-const SKELETON_COUNT = 8;
+const SKELETON_COUNT = 6;
 const GRID_CLASS = 'grid grid-cols-1 content-start gap-2.5 sm:grid-cols-2';
-const RESULTS_AREA_CLASS = 'h-[340px] overflow-y-auto overflow-x-hidden p-1.5';
+// 260px: fits 3 full rows + a peek of the 4th, instead of a full 4 — tall
+// enough to still feel like a real grid, short enough that the whole panel
+// (header, hint, both columns) fits on a real laptop window without
+// scrolling before picking anything, which 340px didn't.
+const RESULTS_AREA_CLASS = 'h-[260px] overflow-y-auto overflow-x-hidden p-1.5';
 
 function SwapIcon() {
   return (
