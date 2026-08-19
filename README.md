@@ -76,7 +76,8 @@ UI (componentes)  ──►  hooks (estado + orquestación)  ──►  lib/api.
 
 ```
 src/
-  app/           Server Component (prefetch + hidratación), layout, providers, globals.css
+  app/           page.tsx (prefetch + hidratación), layout.tsx, providers.tsx, globals.css
+                 loading.tsx / error.tsx (estados a nivel de ruta), icon.tsx / apple-icon.tsx (favicon)
   components/    Home/ (Client Component con la lógica interactiva) + un folder por componente
   hooks/         useCharacters, useEpisodesComparison, useDebouncedValue, useTheme...
   lib/           api.ts (HTTP), query-client.ts, query-keys.ts, constants.ts
