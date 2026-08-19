@@ -114,7 +114,7 @@ export function HomeClient({
 
   return (
     <main className="mx-auto max-w-6xl px-6 pt-6 pb-12">
-      <header className="mb-3 flex items-center justify-between gap-3">
+      <header className="mb-2 flex items-center justify-between gap-3">
         <h1 className="min-w-0">
           <span className="sr-only">Rick &amp; Morty - Episode Explorer</span>
           <span aria-hidden="true" className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
@@ -126,7 +126,7 @@ export function HomeClient({
         </h1>
         <ThemeToggle />
       </header>
-      <p className="mb-5 max-w-2xl text-sm text-gray-500 dark:text-gray-400">
+      <p className="mb-4 max-w-2xl text-sm text-gray-500 dark:text-gray-400">
         Pick a character in <strong className="font-semibold">{CHARACTER_1_LABEL}</strong> and
         another in <strong className="font-semibold">{CHARACTER_2_LABEL}</strong> to see which
         episodes they share and which ones are exclusive to each.
@@ -163,7 +163,7 @@ export function HomeClient({
         />
       </div>
 
-      <div ref={comparisonRef} className="mt-6 scroll-mt-6">
+      <div ref={comparisonRef} className="mt-4 scroll-mt-4">
         {character1 && character2 && (
           <ComparisonToolbar onClear={clearSelection} isFetching={isFetching} />
         )}
